@@ -2,12 +2,16 @@ apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   name: node-tap-app
-  namespace: default
+  namespace: tap-workload
   labels:
     apps.tanzu.vmware.com/workload-type: web
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: node-tap-app
 spec:
+  params:
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
   source:
     git:
       url: https://github.com/rajks24/node-tap-app.git
